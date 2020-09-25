@@ -1,0 +1,10 @@
+influxdb = {
+	"hostname": "localhost",
+	"database": "test"
+}
+issues = [{
+	"name": "connections",
+	"authorization_token": "e5a8...",
+	"issue_id": "100....",
+	"tags": ["ALL"]
+}]
