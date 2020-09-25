@@ -9,8 +9,8 @@ import localsettings as settings
 influx = influxdb.InfluxDBClient(host=settings.influxdb["hostname"], database=settings.influxdb["database"])
 
 for source in settings.issues:
-	url = f"https://sentry.io/api/0/issues/{source['issue_id']}/events/"
-	auth = f"Bearer {source['authorization_token']}"
+	url = "https://sentry.io/api/0/issues/{0[issue_id]}/events/".format(source)
+	auth = "Bearer {0[authorization_token]}".format(source)
 	if source["tags"] == ["ALL"]:
 		matches_tag = lambda x: True
 	else:
@@ -19,7 +19,7 @@ for source in settings.issues:
 
 	request = urllib.request.Request(url, headers={"Authorization": auth})
 	with urllib.request.urlopen(request) as data:
-		sentry_data = json.load(data)
+		sentry_data = json.loads(data.read().decode('utf-8'))
 		influx_data = []
 		for event in sentry_data:
 			date = event["dateCreated"]
